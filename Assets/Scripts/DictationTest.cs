@@ -8,27 +8,17 @@ public class DictationTest : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text m_Hypotheses;
-
     [SerializeField]
     private TMP_Text m_Recognitions;
-
+    
     private DictationRecognizer m_DictationRecognizer;
 
     void Start()
     {
         m_DictationRecognizer = new DictationRecognizer();
 
-        m_DictationRecognizer.DictationResult += (text, confidence) =>
-        {
-            Debug.LogFormat("Dictation result: {0}", text);
-            m_Recognitions.text += text + "\n";
-        };
-
-        m_DictationRecognizer.DictationHypothesis += (text) =>
-        {
-            Debug.LogFormat("Dictation hypothesis: {0}", text);
-            m_Hypotheses.text += text;
-        };
+        m_DictationRecognizer.DictationResult += VoiceResult;
+        m_DictationRecognizer.DictationHypothesis += VoiceHypothesis;
 
         m_DictationRecognizer.DictationComplete += (completionCause) =>
         {
@@ -42,5 +32,19 @@ public class DictationTest : MonoBehaviour
         };
 
         m_DictationRecognizer.Start();
+    }
+
+    private void VoiceResult(string text, ConfidenceLevel confidence) 
+    {
+        Debug.Log("Reults: " + text);
+        m_Recognitions.text = "";
+        m_Recognitions.text = text;
+    }
+
+    private void VoiceHypothesis(string text) 
+    {
+        // Debug.Log("Continueing Hypothesis: " + text);
+        m_Hypotheses.text = "";
+        m_Hypotheses.text = text;
     }
 }

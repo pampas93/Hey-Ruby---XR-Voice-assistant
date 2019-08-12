@@ -13,20 +13,6 @@ MonoBehaviour:
   m_Name: CustomMixedRealitySpeechCommandsProfile
   m_EditorClassIdentifier: 
   isCustomProfile: 1
-  startBehavior: 0
+  startBehavior: 1
   recognitionConfidenceLevel: 1
-  speechCommands:
-  - localizationKey: 
-    keyword: Menu
-    keyCode: 51
-    action:
-      id: 2
-      description: Menu
-      axisConstraint: 2
-  - localizationKey: 
-    keyword: Select
-    keyCode: 49
-    action:
-      id: 1
-      description: Select
-      axisConstraint: 2
+  speechCommands: []
