@@ -13,6 +13,13 @@ MonoBehaviour:
   m_Name: CustomMixedRealitySpeechCommandsProfile
   m_EditorClassIdentifier: 
   isCustomProfile: 1
-  startBehavior: 1
+  startBehavior: 0
   recognitionConfidenceLevel: 1
-  speechCommands: []
+  speechCommands:
+  - localizationKey: 
+    keyword: Hey Ruby
+    keyCode: 0
+    action:
+      id: 0
+      description: 
+      axisConstraint: 0

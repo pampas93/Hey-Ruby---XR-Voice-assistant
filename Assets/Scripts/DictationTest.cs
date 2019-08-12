@@ -3,18 +3,32 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Windows.Speech;
 using TMPro;
+using Microsoft.MixedReality.Toolkit.Input;
+using UnityEngine.Events;
 
-public class DictationTest : MonoBehaviour
+public class DictationTest : MonoBehaviour, IMixedRealitySpeechHandler
 {
     [SerializeField]
     private TMP_Text m_Hypotheses;
     [SerializeField]
     private TMP_Text m_Recognitions;
-    
+
     private DictationRecognizer m_DictationRecognizer;
+
+    [SerializeField]
+    private bool m_enableListening = false;
+    public bool EnableListening 
+    {
+        get { return m_enableListening; }
+        set { m_enableListening = value; }
+    }
 
     void Start()
     {
+        if (!m_enableListening)
+        {
+            return;
+        }
         m_DictationRecognizer = new DictationRecognizer();
 
         m_DictationRecognizer.DictationResult += VoiceResult;
@@ -47,4 +61,12 @@ public class DictationTest : MonoBehaviour
         m_Hypotheses.text = "";
         m_Hypotheses.text = text;
     }
+
+    #region IMixedRealitySpeechHandler Implementation
+
+    void IMixedRealitySpeechHandler.OnSpeechKeywordRecognized(SpeechEventData eventData)
+    {
+        Debug.Log(eventData.Command.Keyword.ToLower());
+    }
+    #endregion
 }
